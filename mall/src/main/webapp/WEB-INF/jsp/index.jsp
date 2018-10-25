@@ -14,6 +14,7 @@
 	</c:if>
 	<c:if test="${loginMember == null}">
 		<a href="${pageContext.request.contextPath}/login">로그인</a>
+		<a href="${pageContext.request.contextPath}/addMember">회원가입</a>
 	</c:if>
 </body>
 </html>

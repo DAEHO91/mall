@@ -13,16 +13,24 @@ import cafe.jjdev.mall.service.MemberDao;
 @WebServlet("/addMember")
 public class AddMember extends HttpServlet{
 	MemberDao memberDao;
-	// íšŒì›ê°€ì… í¼
+
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.getRequestDispatcher("/WEB-INF/jsp/addMember.jsp").forward(request, response);
 	}
-	// íšŒì›ê°€ì… ì•¡ì…˜
+
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Member member = new Member();
 		memberDao = new MemberDao();
+		int level = 0;
+		member.setId((String)request.getParameter("id"));
+		member.setPw((String)request.getParameter("pw"));
+		if(request.getParameter("level")=="°ü¸®ÀÚ") {
+			//1ÀÏ½Ã °ü¸®ÀÚ
+			level = 1;
+		}		
+		member.setLevel(level);
 		int row = memberDao.insertMember(member);
 		response.sendRedirect(request.getContextPath()+"/login");
 	}
