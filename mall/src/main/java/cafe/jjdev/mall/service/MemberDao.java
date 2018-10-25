@@ -91,4 +91,10 @@ public class MemberDao {
         return loginResult;
 	}
 	
+	
+	public Member selectMember(String id) {
+		return null;
+	}
+	
+	
 }

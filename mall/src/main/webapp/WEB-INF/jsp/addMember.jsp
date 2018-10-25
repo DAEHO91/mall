@@ -7,7 +7,7 @@
 </head>
 <body>
 	<h2>addMember Form</h2>
-	<form action="<%=request.getContextPath()%>/addMember" method="post">
+	<form action="${pageContext.request.contextPath}/addMember" method="post">
 		아이디 : 
 		<input type="text" name="id"><br>
 		비밀번호 :

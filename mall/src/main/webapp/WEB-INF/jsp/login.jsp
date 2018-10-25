@@ -7,7 +7,8 @@
 </head>
 <body>
 	<h1>로그인 폼</h1>
-	<form action="<%= request.getContextPath()%>/login" method="post">
+	<a href="${pageContext.request.contextPath}/addMember">회원가입</a>
+	<form action="${pageContext.request.contextPath}/login" method="post">
 		아이디
 		<input type="text" name="id"><br>
 		비밀번호
