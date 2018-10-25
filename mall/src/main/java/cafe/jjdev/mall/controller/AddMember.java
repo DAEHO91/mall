@@ -26,7 +26,7 @@ public class AddMember extends HttpServlet{
 		member.setId(request.getParameter("id"));
 		member.setPw(request.getParameter("pw"));	
 		member.setLevel(Integer.parseInt(request.getParameter("level")));
-		int row = memberDao.insertMember(member);
+		int row = memberDao.insertMember(member);	//값을 받아서 할수있는처리?????????????
 		response.sendRedirect(request.getContextPath()+"/login");
 	}
 }

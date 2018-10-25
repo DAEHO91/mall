@@ -58,6 +58,37 @@ public class MemberDao {
         }
         
 		return 0;
-
 	}
+	
+	
+	//멤버로그인 처리
+	public boolean loginMember(Member member) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        boolean loginResult = false; // 리턴을 위한 변수 선언. 기본값 false.. false 반환시 회원정보없음->실패
+        
+        try {
+            connection = this.getConnection();
+            preparedStatement = connection.prepareStatement("select id, level from member where id=? and pw=?");
+            preparedStatement.setString(1, member.getId());
+            preparedStatement.setString(2, member.getPw());
+            
+            resultSet = preparedStatement.executeQuery();
+            
+            if(resultSet.next()) {
+            	//select 값이 있을경우 로그인성공,, 리턴값 true
+            	//서블릿에서 true값일시 세션에 로그인정보를 저장
+            	loginResult = true;
+            }
+            
+		}catch(Exception exception) {
+            exception.printStackTrace();
+        } finally {
+            this.close(connection, preparedStatement, resultSet);
+        }
+        
+        return loginResult;
+	}
+	
 }
