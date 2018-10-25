@@ -13,7 +13,10 @@
 		비밀번호 :
 		<input type="password" name="pw"><br>
 		권한 :
-		<input type="text" name="level"><br>
+		<select name="level">
+			<option value="1">관리자</option>
+			<option value="0">고객</option>
+		</select><br>
 		<button type="submit">가입</button>
 	</form>
 </body>

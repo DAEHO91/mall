@@ -23,14 +23,9 @@ public class AddMember extends HttpServlet{
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Member member = new Member();
 		memberDao = new MemberDao();
-		int level = 0;
-		member.setId((String)request.getParameter("id"));
-		member.setPw((String)request.getParameter("pw"));
-		if(request.getParameter("level")=="包府磊") {
-			//1老矫 包府磊
-			level = 1;
-		}		
-		member.setLevel(level);
+		member.setId(request.getParameter("id"));
+		member.setPw(request.getParameter("pw"));	
+		member.setLevel(Integer.parseInt(request.getParameter("level")));
 		int row = memberDao.insertMember(member);
 		response.sendRedirect(request.getContextPath()+"/login");
 	}
