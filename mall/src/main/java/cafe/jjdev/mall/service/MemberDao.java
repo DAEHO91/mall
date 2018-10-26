@@ -10,6 +10,7 @@ public class MemberDao {
 	
 	// 디비 연결..
     private Connection getConnection() throws ClassNotFoundException, SQLException {
+    	System.out.println("DB연결실행 MemberDao.java");
         Connection connection = null;
         Class.forName("com.mysql.jdbc.Driver");
         String jdbcDriver = "jdbc:mysql://localhost:3306/mall?useUnicode=true&characterEncoding=euckr";
@@ -33,7 +34,7 @@ public class MemberDao {
 
 	//멤버 입력 메서드
 	public int insertMember(Member member) {
-		
+		System.out.println("insertMember 메서드 실행 MemberDao.java");
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -63,6 +64,7 @@ public class MemberDao {
 	
 	//멤버로그인 처리
 	public boolean loginMember(Member member) {
+		System.out.println("loginMember 메서드 실행 MemberDao.java");
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -91,10 +93,36 @@ public class MemberDao {
         return loginResult;
 	}
 	
-	
+	// 내 정보 조회하기
 	public Member selectMember(String id) {
-		return null;
+		System.out.println("selectMember 메서드 실행 MemberDao.java");
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        Member member = new Member();
+		
+        try {
+            connection = this.getConnection();
+            preparedStatement = connection.prepareStatement("select * from member where id=?");
+            preparedStatement.setString(1, id);
+            
+            resultSet = preparedStatement.executeQuery();
+            
+            if(resultSet.next()) {
+            	 member.setId(resultSet.getString("id"));
+            	 member.setPw(resultSet.getString("pw"));
+            	 member.setLevel(resultSet.getInt("level"));
+            }
+		
+        }catch(Exception exception) {
+            exception.printStackTrace();
+        } finally {
+            this.close(connection, preparedStatement, resultSet);
+        }
+        
+		return member;
+        
 	}
-	
+
 	
 }

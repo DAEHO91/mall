@@ -17,13 +17,18 @@ public class GetMember extends HttpServlet {
 	private MemberDao memberDao;
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("GetMember 메서드 실행  Getmember.java");
 		HttpSession session = request.getSession();
+
+		
 		if(session.getAttribute("loginMember") == null) {
-			// redirect
+			response.sendRedirect(request.getContextPath()+"/login");
 		}else {
+			memberDao = new MemberDao();
 			Member member = memberDao.selectMember((String)session.getAttribute("loginMember"));
+		
 			request.setAttribute("member", member);
-			// forward
+			request.getRequestDispatcher("WEB-INF/jsp/getMember.jsp").forward(request, response);
 		}
 	}
 }

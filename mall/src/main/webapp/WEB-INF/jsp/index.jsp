@@ -10,6 +10,7 @@
 <body>
 	<c:if test="${loginMember != null}">
 		${loginMember}님 반갑습니다.
+		<a href="${pageContext.request.contextPath}/GetMember">내정보보기</a>
 		<a href="${pageContext.request.contextPath}/logout">로그아웃</a>
 	</c:if>
 	<c:if test="${loginMember == null}">
