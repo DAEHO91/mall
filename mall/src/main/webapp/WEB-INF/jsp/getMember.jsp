@@ -6,7 +6,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-${member.getLevel()}
+${member.getLevel()==0}
+${member.getLevel()==1}
 	<table border="1">
 		<tr>
 			<th>회원번호</th><th>아이디</th><th>권한</th>
